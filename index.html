@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check.ia Prototipo Completo</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body data-theme="light" data-font-size="medium">
+    <div class="mobile-container">
+
+        <div id="login-screen" class="screen active">
+            <div class="status-bar"><span>20:00</span><div class="status-icons">📶 🔋</div></div>
+            <div class="content">
+                <h1 class="logo">CHECK.IA</h1>
+                <p class="welcome-text">¡Bienvenido a Check.ia!</p>
+                <h2>INICIAR SESIÓN</h2>
+                <form id="login-form" class="form-layout">
+                    <div class="input-group"><label for="username">Usuario</label><input type="text" id="username" value="UsuarioDemo"></div>
+                    <div class="input-group password-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" value="12345">
+                        <span class="password-toggle">👁️</span>
+                    </div>
+                    <button type="submit" class="btn-primary">ENTRAR</button>
+                </form>
+                <div class="links">
+                    <a href="#" class="nav-link" data-target="register-screen">¿No tienes una cuenta? Registrate</a>
+                    <a href="#" class="nav-link" data-target="reset-screen">¿Olvidaste tu contraseña? Reestablecela</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="reset-screen" class="screen">
+            <div class="status-bar"><span>20:01</span><div class="status-icons">📶 🔋</div></div>
+            <div class="content">
+                <h1 class="logo">CHECK.IA</h1>
+                <h2>REESTABLECER CONTRASEÑA</h2>
+                <form id="reset-form" class="form-layout">
+                    <div class="input-group password-group"><label>Nueva contraseña</label><input type="password"><span class="password-toggle">👁️</span></div>
+                    <div class="input-group password-group"><label>Confirmar Contraseña</label><input type="password"><span class="password-toggle">👁️</span></div>
+                    <button type="submit" class="btn-primary">ENTRAR</button>
+                </form>
+                <div class="links"><a href="#" class="nav-link go-to-login" data-target="login-screen">Volver a Iniciar Sesión</a></div>
+            </div>
+        </div>
+
+        <div id="register-screen" class="screen">
+            <div class="status-bar"><span>20:02</span><div class="status-icons">📶 🔋</div></div>
+            <div class="content">
+                <h1 class="logo">CHECK.IA</h1>
+                <p class="welcome-text">¡Únete a Check.ia!</p>
+                <h2>REGISTRARSE</h2>
+                <form id="register-form" class="form-layout">
+                    <div class="input-group"><label>Nombre y Apellidos</label><input type="text"></div>
+                    <div class="input-group"><label>Correo Electrónico</label><input type="email"></div>
+                    <div class="input-group password-group"><label>Contraseña</label><input type="password"><span class="password-toggle">👁️</span></div>
+                    <div class="input-group password-group"><label>Confirmar Contraseña</label><input type="password"><span class="password-toggle">👁️</span></div>
+                    <button type="submit" class="btn-primary">ENTRAR</button>
+                </form>
+                <div class="links"><a href="#" class="nav-link go-to-login" data-target="login-screen">¿Ya tienes cuenta? Inicia Sesión</a></div>
+            </div>
+        </div>
+
+        <template id="header-template">
+            <div class="header-bar">
+                <h1 class="logo-small">CHECK.IA</h1>
+                <div class="header-icons">
+                    <button class="header-lang-btn">🇪🇸</button>
+                    <button class="header-user-btn">👤</button>
+                    <button class="header-options-btn">...</button>
+                </div>
+            </div>
+        </template>
+        
+        <template id="navbar-template">
+             <div class="nav-bar">
+                <button class="nav-btn" data-target="search-screen">🔍<span class="nav-label">Buscar</span></button>
+                <button class="nav-btn" data-target="trends-screen">🔥<span class="nav-label">Tendencias</span></button>
+                <button class="nav-btn" data-target="chat-screen">💬<span class="nav-label">Chat IA</span></button>
+                <button class="nav-btn" data-target="communities-screen">👥<span class="nav-label">Comunidad</span></button>
+                <button class="nav-btn" data-target="history-screen">🕒<span class="nav-label">Historial</span></button>
+            </div>
+        </template>
+
+        <div id="chat-screen" class="screen main-screen">
+            <div class="chat-content" id="chat-content-area">
+                <div class="chat-bubble received">Hola, soy Check.ia. Pega un enlace o escribe una noticia y te daré un % de fiabilidad.</div>
+            </div>
+            <form class="chat-input-area" id="chat-form">
+                <button type="button" classs="chat-attach" id="chat-attach-btn">+</button>
+                <input type="text" id="chat-input-text" placeholder="Escribe un mensaje...">
+                <button type="submit" class="chat-send">➤</button>
+            </form>
+            </div>
+
+        <div id="search-screen" class="screen main-screen">
+            <div class="content">
+                <h2 class="screen-title">BUSCADOR</h2>
+                <div class="search-box"><input type="text" placeholder="Buscar..."></div>
+                <h3 class="list-title">Favoritos</h3>
+                <ul class="list-view">
+                    <li>Resultados LaLiga</li>
+                    <li>Noticias Madrid</li>
+                </ul>
+                <h3 class="list-title">Visitados recientes</h3>
+                <ul class="list-view">
+                    <li>Remedios dolor de cabeza</li>
+                    <li>Ventajas de usar creatina</li>
+                </ul>
+            </div>
+            </div>
+
+        <div id="communities-screen" class="screen main-screen">
+            <div class="content">
+                <h2 class="screen-title">COMUNIDADES</h2>
+                <div class="dropdown-menu nav-link" data-target="communities-popup">▼ Chats privados</div>
+                <ul class="list-view list-users">
+                    <li class="nav-link" data-target="private-chat-maria"><span class="avatar-icon">👤</span> Maria Martin</li>
+                    <li class="nav-link" data-target="private-chat-lucas"><span class="avatar-icon">👤</span> Lucas López</li>
+                    <li class="nav-link" data-target="private-chat-fernando"><span class="avatar-icon">👤</span> Fernando Fernández</li>
+                </ul>
+            </div>
+            </div>
+
+        <div id="communities-forums-screen" class="screen main-screen">
+            <div class="content">
+                <h2 class="screen-title">COMUNIDADES</h2>
+                <div class="dropdown-menu nav-link" data-target="communities-popup">▼ Foros</div>
+                <ul class="list-view list-forums">
+                    <li class="nav-link" data-target="forum-posts-screen">PALESTINA NEWS</li>
+                    <li class="nav-link" data-target="forum-posts-screen">NORMATIVAS DE TRÁFICO</li>
+                    <li class="nav-link" data-target="forum-posts-screen">MERCADO DE FICHAJES</li>
+                </ul>
+            </div>
+            </div>
+
+        <div id="communities-posts-screen" class="screen main-screen">
+            <div class="content">
+                <h2 class="screen-title">COMUNIDADES</h2>
+                <div class="dropdown-menu nav-link" data-target="communities-popup">▼ Publicaciones</div>
+                <div class="post-card">
+                    <div class="post-header">
+                        <span class="avatar-icon post-avatar">👤</span>
+                        <strong class="nav-link" data-target="other-profile-screen">Usuario_2375</strong>
+                        <button class="btn-follow">Seguir</button>
+                    </div>
+                    <div class="post-content">
+                        <p>Os dejo el enlace al foro "PALESTINA NEWS". Noticias contrastadas y 0 bulos.</p>
+                        <a href="#">#FreePalestine</a> <a href="#">#QueNoTeLaCuelen</a>
+                    </div>
+                    <div class="post-actions">
+                        <button class="btn-like">👍 7.2k</button>
+                        <button class="btn-comment nav-link" data-target="comments-screen">💬 89</button>
+                        <button class="btn-share">↪️ 2.1k</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        <div id="trends-screen" class="screen main-screen">
+            <div class="content">
+                <h2 class="screen-title">TENDENCIAS</h2>
+                <div class="trends-card">
+                    <div class="trends-text">
+                        <p>"Descubren que dormir 8 horas puede ser..."</p>
+                        <small>Compartido 5,6k veces...</small>
+                    </div>
+                    <div class="trends-fiability">8%</div>
+                </div>
+                <div class="trends-card">
+                    <div class="trends-text">
+                        <p>"La OMS confirma que el azúcar cura la depresión"</p>
+                        <small>Compartido 2k veces...</small>
+                    </div>
+                    <div class="trends-fiability">3%</div>
+                </div>
+            </div>
+            </div>
+
+        <div id="history-screen" class="screen main-screen">
+            <div class="content">
+                <h2 class="screen-title">HISTORIAL</h2>
+                <div class="history-controls">
+                    <button class="nav-link" data-target="history-select-screen">Seleccionar</button>
+                    <button class="show-popup" data-target="delete-all-confirm-popup">Borrar Todo</button>
+                </div>
+                <ul class="list-view list-history" id="history-list-container">
+                    <li>"Elecciones 2025" <small>Hoy, 11:23</small></li>
+                    <li>"Huelga general" <small>Ayer, 20:55</small></li>
+                </ul>
+            </div>
+            </div>
+
+        <div id="history-select-screen" class="screen main-screen">
+            <div class="content">
+                <h2 class="screen-title">HISTORIAL</h2>
+                <div class="history-controls">
+                    <button class="nav-link" data-target="history-screen">Seleccionado</button>
+                    <button class="show-popup" data-target="delete-confirm-popup">Borrar</button>
+                </div>
+                <ul class="list-view list-history-select">
+                    <li><input type="checkbox"> "Elecciones 2025"</li>
+                    <li><input type="checkbox"> "Huelga general"</li>
+                </ul>
+            </div>
+            </div>
+
+        <div id="settings-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="trends-screen">←</button><h1 class="logo-small">AJUSTES</h1><div class="header-icons"></div></div>
+            <div class="content">
+                <ul class="settings-list">
+                    <li class="nav-link" data-target="general-settings-screen">Generales</li>
+                    <li class="nav-link" data-target="privacy-screen">Privacidad</li>
+                    <li class="nav-link" data-target="security-screen">Seguridad</li>
+                    <li>Accesibilidad</li>
+                    <li class="nav-link" data-target="personalization-screen">Personalización</li>
+                    <li class="nav-link" data-target="notifications-screen">Notificaciones</li>
+                </ul>
+            </div>
+            </div>
+        <div id="general-settings-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="settings-screen">←</button><h1 class="logo-small">GENERALES</h1><div class="header-icons"></div></div>
+            <div class="content"><ul class="settings-list"><li>Modificar contraseña</li><li>Cambiar correo asociado</li><li class="nav-link go-to-login" data-target="login-screen">Cerrar sesión</li></ul></div>
+            </div>
+        <div id="privacy-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="settings-screen">←</button><h1 class="logo-small">PRIVACIDAD</h1><div class="header-icons"></div></div>
+            <div class="content"><div class="toggle-option"><span>Cuenta privada</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div><p class="description-text">Si tu cuenta es pública, cualquiera podrá ver tu perfil y tus publicaciones.</p></div>
+            </div>
+        <div id="security-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="settings-screen">←</button><h1 class="logo-small">SEGURIDAD</h1><div class="header-icons"></div></div>
+            <div class="content"><ul class="settings-list"><li>Resumen de seguridad</li><li>Alertas recientes</li></ul><div class="toggle-option"><span>Autenticación en 2 pasos</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div></div>
+            </div>
+        <div id="personalization-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="settings-screen">←</button><h1 class="logo-small">PERSONALIZAR</h1><div class="header-icons"></div></div>
+            <div class="content"><div class="settings-option"><label>Tamaño de la letra</label><input type="range" class="font-slider" id="font-size-slider" min="0" max="2" value="1"><div class="font-slider-labels"><small>Pequeño</small><small>Medio</small><small>Grande</small></div></div><div class="settings-option"><label>Idiomas preferidos</label><small>(Español, Castellano)</small></div><div class="toggle-option"><span>Ocultar contenido sensible</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div></div>
+            </div>
+        <div id="notifications-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="settings-screen">←</button><h1 class="logo-small">NOTIFICACIONES</h1><div class="header-icons"></div></div>
+            <div class="content"><div class="toggle-option"><span>Activar notificaciones</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div><div class="toggle-option"><span>Vibración</span><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div></div>
+            </div>
+
+        <div id="help-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="trends-screen">←</button><h1 class="logo-small">? AYUDA</h1><div class="header-icons"></div></div>
+            <div class="content"><div class="search-box"><input type="text" placeholder="Buscar en ayuda..."></div><ul class="help-list"><li>Configurar notificaciones</li><li>Agregar o eliminar cuentas</li></ul></div>
+            </div>
+        <div id="report-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="trends-screen">←</button><h1 class="logo-small">! INFORMAR</h1><div class="header-icons"></div></div>
+            <div class="content"><form class="form-layout"><label>¿Qué tipo de problema tienes?</label><select><option>Usabilidad</option><option>Problema de carga</option></select><label>Describe el problema que tienes</label><textarea rows="5"></textarea><button type="submit" class="btn-primary">ENVIAR</button></form></div>
+            </div>
+
+        <div id="profile-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="trends-screen">←</button><h1 class="logo-small">PERFIL</h1><div class="header-icons"></div></div>
+            <div class="content profile-content"><div class="profile-main"><span class="avatar large"></span><h3>Pepe Álvarez</h3></div><div class="profile-stats"><div><strong>1,205</strong> <small>Seguidores</small></div><div><strong>300</strong> <small>Seguidos</small></div><div><strong>85</strong> <small>Posts</small></div></div><div class="profile-desc"><h4>Descripción</h4><p>Periodista en as.com. Combatiendo los bulo desde hace 15 años</p></div><div class="profile-social"><span class="social-icon instagram"></span><span class="social-icon x-twitter"></span><span class="social-icon linkedin"></span></div></div>
+            </div>
+        <div id="edit-profile-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="profile-screen">←</button><h1 class="logo-small">EDITAR PERFIL</h1><div class="header-icons"></div></div>
+            <div class="content profile-content"><div class="profile-main"><span class="avatar large"></span><div class="edit-group"><label>Pepe Álvarez</label><button class="btn-edit">EDITAR</button></div></div><div class="profile-desc"><h4>Descripción</h4><div class="edit-group"><p>Periodista en as.com...</p><button class="btn-edit">EDITAR</button></div></div><div class="profile-social"><label>Añande los links a tus redes sociales:</label></div></div>
+            </div>
+        <div id="share-profile-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="profile-screen">←</button><h1 class="logo-small">COMPARTIR PERFIL</h1><div class="header-icons"></div></div>
+            <div class="content share-content"><div class="qr-code">[Imagen de QR Code]</div><div class="share-icon">🔗</div></div>
+            </div>
+
+        <div id="comments-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="communities-posts-screen">←</button><h1 class="logo-small">COMENTARIOS</h1><div class="header-icons"></div></div>
+            <div class="content">
+                <div class="comment-thread">
+                    <div class="comment-card"><div class="comment-header"><span class="avatar-icon small">👤</span><strong>Usuario_456</strong></div><p class="comment-body">¡Gran aporte! Justo lo que buscaba.</p><div class="comment-actions"><button class="btn-thumb-up">👍 12</button><button class="btn-thumb-down">👎 1</button></div></div>
+                    <div class="comment-card"><div class="comment-header"><span class="avatar-icon small">👤</span><strong>Usuario_789</strong></div><p class="comment-body">No estoy de acuerdo con el enlace, me parece sesgado.</p><div class="comment-actions"><button class="btn-thumb-up">👍 2</button><button class="btn-thumb-down">👎 5</button></div></div>
+                </div>
+            </div>
+            </div>
+
+        <div id="private-chat-maria" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="communities-screen">←</button><h1 class="logo-small">Maria Martin</h1><div class="header-icons"></div></div>
+            <div class="chat-content" id="chat-content-maria">
+                <div class="chat-bubble received">¡Hola! ¿Viste el post sobre Palestina?</div>
+                <div class="chat-bubble sent">Hola Maria, sí, ¡justo lo acabo de ver!</div>
+            </div>
+            <form class="chat-input-area" id="private-chat-form-maria">
+                <button type="button" classs="chat-attach">+</button><input type="text" placeholder="Escribe un mensaje..."><button type="submit" class="chat-send">➤</button>
+            </form>
+            </div>
+        
+        <div id="private-chat-lucas" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="communities-screen">←</button><h1 class="logo-small">Lucas López</h1><div class="header-icons"></div></div>
+            <div class="chat-content" id="chat-content-lucas">
+                <div class="chat-bubble received">¿Viste el partido de ayer?</div>
+            </div>
+            <form class="chat-input-area" id="private-chat-form-lucas">
+                <button type="button" classs="chat-attach">+</button><input type="text" placeholder="Escribe un mensaje..."><button type="submit" class="chat-send">➤</button>
+            </form>
+            </div>
+
+        <div id="private-chat-fernando" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="communities-screen">←</button><h1 class="logo-small">Fernando Fernández</h1><div class="header-icons"></div></div>
+            <div class="chat-content" id="chat-content-fernando">
+                <div class="chat-bubble received">Recuerda la reunión de mañana.</div>
+            </div>
+            <form class="chat-input-area" id="private-chat-form-fernando">
+                <button type="button" classs="chat-attach">+</button><input type="text" placeholder="Escribe un mensaje..."><button type="submit" class="chat-send">➤</button>
+            </form>
+            </div>
+
+        <div id="forum-posts-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="communities-forums-screen">←</button><h1 class="logo-small">PALESTINA NEWS</h1><div class="header-icons"></div></div>
+            <div class="content">
+                <div class="post-card"><div class="post-header"><span class="avatar-icon post-avatar">👤</span><strong class="nav-link" data-target="other-profile-screen">Usuario_2375</strong><button class="btn-follow">Seguir</button></div><div class="post-content"><p>Bienvenidos al foro oficial. Solo noticias verificadas.</p></div><div class="post-actions"><button class="btn-like">👍 150</button><button class="btn-comment nav-link" data-target="comments-screen">💬 3</button><button class="btn-share">↪️ 22</button></div></div>
+            </div>
+            </div>
+
+        <div id="other-profile-screen" class="screen">
+            <div class="header-bar"><button class="btn-back" data-target="communities-posts-screen">←</button><h1 class="logo-small">PERFIL</h1><div class="header-icons"></div></div>
+            <div class="content profile-content"><div class="profile-main"><span class="avatar large"></span><h3>Usuario_2375</h3></div><div class="profile-stats"><div><strong>150</strong> <small>Seguidores</small></div><div><strong>45</strong> <small>Seguidos</small></div><div><strong>12</strong> <small>Posts</small></div></div><div class="profile-desc"><h4>Descripción</h4><p>Compartiendo noticias y luchando contra los bulos.</p></div><button class="btn-primary btn-follow">Seguir</button></div>
+            </div>
+
+        <div id="language-popup" class="popup-menu">
+            <h4>Seleccione un idioma</h4>
+            <ul><li>Español</li><li>Català</li><li>Euskara</li><li>Galego</li><li>English</li><li>Français</li><li>Deutsch</li><li>Italiano</li><li>Português</li><li>العربية</li><li>中文 (简体)</li><li>日本語</li></ul>
+        </div>
+        <div id="user-popup" class="popup-menu">
+            <ul><li class="nav-link" data-target="edit-profile-screen">Editar perfil</li><li class="nav-link" data-target="profile-screen">Ver perfil</li><li class="nav-link" data-target="share-profile-screen">Compartir perfil</li><li class="nav-link go-to-login" data-target="login-screen">Cerrar sesión</li></ul>
+        </div>
+        <div id="options-popup" class="popup-menu">
+            <ul><li class="nav-link" data-target="settings-screen">⚙️ Ajustes</li><li id="theme-toggle-btn">🌙 Tema Oscuro</li><li class="nav-link" data-target="help-screen">❓ Ayuda</li><li class="nav-link" data-target="report-screen">@ Informar</li></ul>
+        </div>
+        <div id="communities-popup" class="popup-menu">
+            <ul><li class="nav-link" data-target="communities-screen">Chats privados</li><li class="nav-link" data-target="communities-forums-screen">Foros</li><li class="nav-link" data-target="communities-posts-screen">Publicaciones</li></ul>
+        </div>
+        <div id="delete-confirm-popup" class="popup-dialog">
+            <div class="popup-dialog-content"><p>¿Seguro que desea borrar las búsquedas seleccionadas?</p><div class="popup-dialog-actions"><button class="btn-secondary" id="cancel-delete">No</button><button class="btn-primary" id="confirm-delete">Si</button></div></div>
+        </div>
+        <div id="chat-attach-popup" class="popup-menu">
+            <ul><li>📷 Tomar Foto</li><li>🖼️ Galería</li><li>📄 Adjuntar Archivo</li></ul>
+        </div>
+        
+        <div id="delete-all-confirm-popup" class="popup-dialog">
+            <div class="popup-dialog-content">
+                <p>¿Seguro que desea borrar **todo el historial**? Esta acción no se puede deshacer.</p>
+                <div class="popup-dialog-actions">
+                    <button class="btn-secondary" id="cancel-delete-all">No</button>
+                    <button class="btn-primary" id="confirm-delete-all">Si, Borrar Todo</button>
+                </div>
+            </div>
+        </div>
+        
+
+    </div> <script src="script.js"></script>
+</body>
+</html>

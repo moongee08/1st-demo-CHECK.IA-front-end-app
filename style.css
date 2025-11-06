@@ -1,0 +1,462 @@
+/* --- 1. CONFIGURACIÓN GLOBAL Y TEMAS --- */
+:root {
+    /* TEMA CLARO (NUEVO DEFAULT) */
+    --bg-color: #FFFFFF; /* Fondo Blanco */
+    --text-color: #333333;
+    --logo-color: #3A86FF;
+    --accent-color: #3A86FF; /* Nav Bar Azul */
+    --accent-text-color: #FFFFFF;
+    --input-bg: #F0F2F5; /* Gris claro */
+    --input-text: #333333;
+    --card-bg: #FFFFFF;
+    --card-border: 1px solid #E0E0E0;
+    --bubble-sent-bg: #3A86FF;
+    --bubble-sent-text: white;
+    --bubble-received-bg: #F0F2F5;
+    --bubble-received-text: #333;
+    --list-border: rgba(0, 0, 0, 0.1);
+    --btn-follow-bg: #3A86FF;
+    --btn-follow-text: white;
+    --status-bar-color: #333333;
+    --thumb-color: #3A86FF;
+}
+[data-theme="dark"] {
+    --bg-color: #121212; /* Casi negro */
+    --text-color: #E0E0E0; /* Blanco suave */
+    --logo-color: #3A86FF;
+    --accent-color: #1E1E1E; /* Nav Bar Gris Oscuro */
+    --accent-text-color: #3A86FF; /* Iconos Azules */
+    --input-bg: #2C2C2C; /* Gris oscuro */
+    --input-text: white;
+    --card-bg: #1E1E1E; /* Gris para tarjetas */
+    --card-border: 1px solid #2C2C2C;
+    --bubble-sent-bg: #3A86FF;
+    --bubble-sent-text: white;
+    --bubble-received-bg: #333333;
+    --bubble-received-text: white;
+    --list-border: rgba(255, 255, 255, 0.1);
+    --btn-follow-bg: #3A86FF;
+    --btn-follow-text: white;
+    --status-bar-color: #FFFFFF;
+    --thumb-color: #FCA311;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    transition: background-color 0.3s;
+}
+[data-font-size="small"] { font-size: 13px; }
+[data-font-size="medium"] { font-size: 15px; }
+[data-font-size="large"] { font-size: 17px; }
+
+.mobile-container {
+    width: 375px;
+    height: 812px;
+    background-color: #111;
+    border-radius: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- 2. LÓGICA DE PANTALLAS (SPA) --- */
+.screen {
+    display: none;
+    width: 350px;
+    height: 782px;
+    background-color: var(--bg-color);
+    border-radius: 25px;
+    flex-direction: column;
+    color: var(--text-color);
+    position: absolute;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+}
+.screen.active { display: flex; }
+.content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+.content::-webkit-scrollbar { display: none; }
+.content { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* --- 3. ESTILOS COMUNES (AUTH) --- */
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--status-bar-color);
+}
+.logo {
+    font-family: 'Anton', sans-serif;
+    font-size: 3.5em;
+    text-align: center;
+    margin: 20px 0 10px 0;
+    color: var(--logo-color);
+}
+.welcome-text { text-align: center; font-size: 1.2em; margin-bottom: 30px; }
+h2 { text-align: center; font-size: 1.6em; font-weight: 700; margin-bottom: 25px; }
+.form-layout { display: flex; flex-direction: column; width: 100%; }
+.input-group { margin-bottom: 15px; position: relative; }
+.input-group label { display: block; font-size: 0.9em; margin-bottom: 8px; padding-left: 10px; }
+.input-group input {
+    width: 100%; padding: 12px 45px 12px 15px; border: none; border-radius: 8px;
+    background-color: var(--input-bg); color: var(--input-text); font-size: 1em; box-sizing: border-box;
+}
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 38px;
+    font-size: 1.3em;
+    cursor: pointer;
+    user-select: none;
+    color: var(--text-color);
+}
+.btn-primary {
+    width: 100%; padding: 15px; border: none; border-radius: 8px;
+    background-color: #FCA311;
+    color: #333;
+    font-size: 1.2em;
+    font-weight: 700; cursor: pointer; margin-top: 20px;
+}
+.links { margin-top: 30px; text-align: center; }
+.links a {
+    display: block; color: var(--text-color); text-decoration: underline;
+    font-size: 0.9em; margin-bottom: 15px; cursor: pointer;
+}
+
+/* --- 4. CABECERA Y NAVEGACIÓN PRINCIPAL --- */
+.nav-bar {
+    display: flex; justify-content: space-around; align-items: stretch;
+    background-color: var(--accent-color);
+    padding: 5px 0;
+    margin-top: auto; 
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+.nav-bar .nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    background: none; border: none;
+    color: var(--accent-text-color); 
+    cursor: pointer; opacity: 0.7;
+    font-size: 1.6em;
+    flex: 1;
+    padding: 5px 0;
+}
+.nav-bar .nav-btn.active { opacity: 1; }
+.nav-label {
+    font-size: 0.5em;
+    font-weight: bold;
+    display: block;
+}
+.header-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 20px;
+}
+.logo-small {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.6em; color: var(--logo-color); margin: 0; text-align: center; flex-grow: 1;
+}
+.header-icons { display: flex; gap: 10px; }
+.header-icons button, .btn-back {
+    background: none; border: none; color: var(--text-color);
+    font-size: 1.3em; font-weight: bold; cursor: pointer;
+}
+.screen-title { text-align: left; font-size: 1.8em; margin: 0 0 20px 0; }
+
+/* --- 5. PANTALLA 4 (CHAT) --- */
+.chat-content { flex-grow: 1; padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+.chat-bubble { padding: 10px 15px; border-radius: 18px; max-width: 80%; font-size: 1em; line-height: 1.4; }
+.chat-bubble.received { background-color: var(--bubble-received-bg); color: var(--bubble-received-text); align-self: flex-start; }
+.chat-bubble.sent { background-color: var(--bubble-sent-bg); color: var(--bubble-sent-text); align-self: flex-end; }
+.chat-bubble.ai-response {
+    background-color: var(--card-bg);
+    border: 1px solid var(--accent-color);
+}
+.chat-bubble.ai-response strong { color: var(--logo-color); font-size: 1.5em; }
+.chat-input-area {
+    display: flex; align-items: center; padding: 10px;
+    background-color: var(--input-bg); border-radius: 25px; margin: 10px;
+}
+.chat-input-area input { flex-grow: 1; border: none; outline: none; font-size: 1em; padding: 0 10px; background: none; color: var(--input-text); }
+.chat-attach, .chat-send { border: none; background: none; font-size: 1.5em; cursor: pointer; color: var(--text-color); }
+.chat-send { color: var(--logo-color); }
+
+/* --- 6. PANTALLA 5 (BUSCADOR) --- */
+.search-box { background: var(--input-bg); border-radius: 10px; padding: 10px; margin-bottom: 20px; }
+.search-box input { width: 100%; border: none; outline: none; font-size: 1em; background: transparent; color: var(--input-text); }
+.list-title {
+    font-size: 1.3em; margin: 20px 0 10px 0;
+    border-bottom: 1px solid var(--list-border); padding-bottom: 5px;
+}
+.list-view { list-style: none; padding: 0; margin: 0; }
+.list-view li {
+    font-size: 1em; padding: 12px 5px;
+    border-bottom: 1px solid var(--list-border);
+    cursor: pointer;
+}
+.list-view li:hover { background-color: var(--input-bg); }
+
+/* --- 7. PANTALLAS 6-9 (COMUNIDADES) --- */
+.dropdown-menu {
+    font-size: 1.2em; background: var(--input-bg);
+    padding: 10px; border-radius: 8px; margin-bottom: 15px; cursor: pointer;
+}
+/* CAMBIO: Icono de Avatar */
+.avatar-icon {
+    font-size: 1.2em;
+    width: 30px;
+    text-align: center;
+    margin-right: 10px;
+    color: var(--text-color);
+    opacity: 0.6;
+}
+.list-users li { display: flex; align-items: center; }
+.avatar { /* Mantenido para perfil */
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--input-bg);
+}
+.avatar-icon.post-avatar {
+    font-size: 1.5em;
+    margin-right: 5px;
+}
+.list-forums li {
+    background: var(--card-bg);
+    border: var(--card-border);
+    padding: 12px; border-radius: 8px;
+    margin-bottom: 10px; font-weight: bold;
+}
+.post-card {
+    background: var(--card-bg);
+    border: var(--card-border);
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+.post-header { display: flex; align-items: center; gap: 10px; padding: 10px 15px; }
+.post-header strong { flex-grow: 1; cursor: pointer; }
+.post-header strong:hover { text-decoration: underline; }
+.btn-follow {
+    background: var(--btn-follow-bg); color: var(--btn-follow-text);
+    border: none; padding: 5px 12px; border-radius: 15px;
+    font-size: 0.9em; font-weight: bold; cursor: pointer;
+}
+.btn-follow.followed { background: var(--input-bg); color: var(--text-color); }
+.post-content { padding: 0 15px 10px 15px; font-size: 1em; }
+.post-content p { margin: 0 0 10px 0; }
+.post-content a { color: var(--logo-color); text-decoration: none; }
+.post-actions {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid var(--list-border);
+    padding: 5px 0;
+}
+.post-actions button {
+    background: none; border: none; color: var(--text-color);
+    font-size: 0.9em; cursor: pointer; padding: 5px;
+}
+.post-actions button.liked { color: var(--logo-color); font-weight: bold; }
+
+/* --- 8. PANTALLAS 10-13 (TENDENCIAS, HISTORIAL) --- */
+.trends-card {
+    display: flex; background: var(--card-bg); border: var(--card-border);
+    border-radius: 8px; padding: 15px; margin-bottom: 15px; gap: 10px;
+}
+.trends-text { flex-grow: 1; }
+.trends-text p { font-size: 1em; font-weight: bold; margin: 0 0 10px 0; }
+.trends-text small { display: block; opacity: 0.8; font-size: 0.9em; }
+.trends-fiability { font-size: 1.1em; font-weight: bold; color: var(--logo-color); text-align: right; }
+.history-controls { display: flex; justify-content: space-between; margin-bottom: 15px; }
+.history-controls button {
+    background: var(--input-bg); border: none; color: var(--text-color);
+    padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 0.9em;
+}
+.list-history li { display: flex; justify-content: space-between; align-items: center; }
+.list-history small { opacity: 0.7; }
+.list-history-select li { display: flex; align-items: center; gap: 10px; }
+.list-history-select input { width: 20px; height: 20px; }
+
+/* --- 9. POPUPS (13, 14, 15, 16, 7) --- */
+.popup-menu {
+    display: none;
+    position: absolute;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: var(--card-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    padding: 10px;
+    z-index: 100;
+}
+.popup-menu.active { display: block; }
+#language-popup { top: 60px; right: 20px; }
+#user-popup { top: 60px; right: 20px; }
+#options-popup { top: 60px; right: 20px; }
+#communities-popup { top: 120px; left: 30px; right: 30px; }
+#chat-attach-popup {
+    bottom: 80px;
+    left: 30px;
+    width: 200px;
+}
+.popup-menu h4 { margin: 0 0 10px 0; padding-bottom: 5px; border-bottom: 1px solid var(--list-border); }
+.popup-menu ul { list-style: none; padding: 0; margin: 0; }
+#language-popup ul {
+    max-height: 200px;
+    overflow-y: auto;
+}
+.popup-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+.popup-menu li:hover { background-color: var(--card-bg); }
+
+/* Popup de Diálogo (Pág 13) */
+.popup-dialog {
+    display: none;
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+}
+.popup-dialog.active { display: flex; }
+.popup-dialog-content {
+    background: var(--bg-color);
+    color: var(--text-color);
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    text-align: center;
+}
+.popup-dialog-content p { font-size: 1.1em; margin: 0 0 20px 0; }
+.popup-dialog-actions { display: flex; justify-content: space-around; gap: 10px; }
+.btn-secondary {
+    background: var(--input-bg); color: var(--text-color);
+    padding: 10px 20px; border: none; border-radius: 8px;
+    font-size: 1em; cursor: pointer; flex: 1;
+}
+
+/* --- 10. PANTALLAS 17-22 (AJUSTES) --- */
+.settings-list { list-style: none; padding: 0; margin: 0; }
+.settings-list li {
+    font-size: 1.1em;
+    padding: 16px 5px;
+    border-bottom: 1px solid var(--list-border);
+    cursor: pointer;
+}
+.settings-list li:hover { background-color: var(--input-bg); }
+.toggle-option {
+    display: flex; justify-content: space-between;
+    align-items: center; padding: 15px 0;
+}
+.toggle-option span { font-size: 1em; }
+.description-text { font-size: 0.9em; opacity: 0.9; line-height: 1.4; }
+.settings-option { padding: 15px 0; }
+.settings-option label { font-size: 1em; display: block; margin-bottom: 10px; }
+.settings-option small { display: block; opacity: 0.8; margin-top: 5px; }
+.font-slider { width: 100%; }
+.font-slider-labels { display: flex; justify-content: space-between; font-size: 0.8em; opacity: 0.8; }
+.switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc; transition: .4s; border-radius: 34px;
+}
+.slider:before {
+    position: absolute; content: ""; height: 26px; width: 26px;
+    left: 4px; bottom: 4px; background-color: white;
+    transition: .4s; border-radius: 50%;
+}
+input:checked + .slider { background-color: var(--thumb-color); }
+input:checked + .slider:before { transform: translateX(26px); }
+
+/* --- 11. PANTALLAS 23-27 (AYUDA, PERFIL, ETC) --- */
+.help-list { list-style: none; padding: 0; }
+.help-list li {
+    background: var(--input-bg); padding: 12px;
+    border-radius: 8px; margin-bottom: 10px;
+    font-size: 0.9em; cursor: pointer;
+}
+.form-layout label { margin: 15px 0 5px 0; font-size: 1em; }
+.form-layout select, .form-layout textarea {
+    width: 100%; padding: 10px; border-radius: 8px; border: none;
+    font-size: 1em; background: var(--input-bg); color: var(--input-text);
+}
+.profile-content { align-items: center; }
+.profile-main { text-align: center; }
+.avatar.large {
+    width: 100px; height: 100px; border-radius: 50%;
+    background: var(--input-bg); display: block; margin: 0 auto 15px auto;
+}
+.profile-main h3 { font-size: 1.5em; margin: 0; }
+.profile-stats {
+    display: flex; justify-content: space-around; width: 100%;
+    background: var(--card-bg); border: var(--card-border);
+    padding: 15px; border-radius: 8px;
+    margin-top: 20px; text-align: center;
+}
+.profile-stats strong { display: block; font-size: 1.2em; }
+.profile-stats small { font-size: 0.9em; opacity: 0.8; }
+.profile-desc {
+    width: 100%; margin-top: 20px; background: var(--card-bg);
+    border: var(--card-border);
+    padding: 15px; border-radius: 8px;
+}
+.profile-social { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+.social-icon { width: 50px; height: 50px; background: var(--input-bg); border-radius: 10px; }
+.edit-group { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+.btn-edit {
+    background: #FCA311; color: #333; border: none;
+    padding: 5px 10px; border-radius: 5px; cursor: pointer;
+}
+.share-content { align-items: center; justify-content: center; gap: 30px; }
+.qr-code {
+    width: 250px; height: 250px;
+    background: white; color: #333;
+    display: flex; align-items: center; justify-content: center;
+}
+.share-icon { font-size: 3em; }
+
+/* --- 12. NUEVOS ESTILOS (COMENTARIOS) --- */
+.comment-thread { display: flex; flex-direction: column; gap: 15px; }
+.comment-card {
+    background: var(--card-bg);
+    border: var(--card-border);
+    border-radius: 8px;
+    padding: 12px;
+}
+.comment-header { display: flex; align-items: center; gap: 10px; }
+.avatar-icon.small { font-size: 1em; width: 25px; }
+.comment-header strong { font-size: 0.9em; }
+.comment-body { font-size: 1em; margin: 10px 0; }
+.comment-actions { display: flex; gap: 15px; }
+.comment-actions button {
+    background: none; border: none; color: var(--text-color);
+    opacity: 0.7; cursor: pointer; font-size: 0.9em;
+}
+.comment-actions button.active {
+    opacity: 1;
+    font-weight: bold;
+    color: var(--logo-color);
+}
